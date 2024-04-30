@@ -15,6 +15,7 @@ const useStyles = makeStyles({
 		marginTop: 15,
 		marginLeft: 10,
 		marginRight: 10,
+		fontFamily: `"Lora", serif`,
 	},
 });
 

@@ -32,12 +32,7 @@ export default function RecipeReviewCard() {
 
 	return (
 		<Card sx={{ maxWidth: 345 }}>
-			<CardMedia
-				component="img"
-				height="194"
-				image="/static/images/cards/paella.jpg"
-				alt="Paella dish"
-			/>
+			<CardMedia component="img" height="194" image="" alt="" />
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="div">
 					Lizard

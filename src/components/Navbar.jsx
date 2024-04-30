@@ -12,13 +12,17 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../assets/museum.png";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const pages = ["Dashboard", "New Blog", "About"];
-const settings = ["Login", "My Blogs", "Profile", "Logout"];
-
+const loggedInSettings = ["My Blogs", "Profile", "Logout"];
+const loggedOutSettings = ["Login"];
 function Navbar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
+	const { currentUser } = useSelector((state) => state.auth);
+	const navigate = useNavigate();
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -34,7 +38,15 @@ function Navbar() {
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
 	};
-
+	const handleMenuItemClick = (setting) => {
+		if (setting === "Login") {
+			// Logout işlemi
+		} else if (setting === "Logout") {
+			navigate("/login"); // Login sayfasına yönlendiriyoruz
+		}
+		handleCloseUserMenu();
+	};
+	const isUserLoggedIn = Boolean(currentUser);
 	return (
 		<AppBar position="static" sx={{ backgroundColor: "#18003C" }}>
 			<Container maxWidth="xl">
@@ -47,7 +59,7 @@ function Navbar() {
 						sx={{
 							mr: 2,
 							display: { xs: "none", md: "flex" },
-							fontFamily: "monospace",
+							fontFamily: `"Lora", serif`,
 							fontWeight: 700,
 							letterSpacing: ".3rem",
 							color: "inherit",
@@ -71,6 +83,7 @@ function Navbar() {
 						>
 							<MenuIcon />
 						</IconButton>
+
 						<Menu
 							id="menu-appbar"
 							anchorEl={anchorElNav}
@@ -101,6 +114,7 @@ function Navbar() {
 							))}
 						</Menu>
 					</Box>
+					<div>Deutche</div>
 					<img
 						src={logo}
 						alt="Logo"
@@ -110,6 +124,7 @@ function Navbar() {
 							objectFit: "cover",
 						}}
 					/>
+					<div>Museen</div>
 					<Typography
 						variant="h5"
 						noWrap
@@ -119,7 +134,7 @@ function Navbar() {
 							mr: 2,
 							display: { xs: "flex", md: "none" },
 							flexGrow: 1,
-							fontFamily: "monospace",
+							fontFamily: `"Lora", serif`,
 							fontWeight: 700,
 							letterSpacing: ".3rem",
 							color: "inherit",
@@ -155,6 +170,7 @@ function Navbar() {
 								/>
 							</IconButton>
 						</Tooltip>
+
 						<Menu
 							sx={{ mt: "45px" }}
 							id="menu-appbar"
@@ -171,10 +187,13 @@ function Navbar() {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}
 						>
-							{settings.map((setting) => (
+							{(isUserLoggedIn
+								? loggedInSettings
+								: loggedOutSettings
+							).map((setting) => (
 								<MenuItem
 									key={setting}
-									onClick={handleCloseUserMenu}
+									onClick={() => handleMenuItemClick(setting)}
 								>
 									<Typography textAlign="center">
 										{setting}
