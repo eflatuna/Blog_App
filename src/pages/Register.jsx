@@ -38,6 +38,7 @@ const Register = () => {
 						variant="h5"
 						align="center"
 						mb={2}
+						mt={1}
 						color="#18003C"
 					>
 						Sign up
