@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import logo from "../assets/museum.png";
 
 const pages = ["Dashboard", "New Blog", "About"];
-const settings = ["Login"];
+const settings = ["Login", "My Blogs", "Profile", "Logout"];
 
 function Navbar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);

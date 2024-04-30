@@ -120,11 +120,11 @@ const SignUpForm = ({
 						id="image"
 						type="url"
 						variant="outlined"
-						value={values.email}
+						value={values.imagebio}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						helperText={touched.email && errors.email}
-						error={touched.email && Boolean(errors.email)}
+						helperText={touched.image && errors.image}
+						error={touched.image && Boolean(errors.image)}
 					/>
 					<TextField
 						label="Bio"
@@ -132,11 +132,11 @@ const SignUpForm = ({
 						id="bio"
 						type="bio"
 						variant="outlined"
-						value={values.email}
+						value={values.bio}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						helperText={touched.email && errors.email}
-						error={touched.email && Boolean(errors.email)}
+						helperText={touched.bio && errors.bio}
+						error={touched.bio && Boolean(errors.bio)}
 					/>
 
 					<TextField
