@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRouter from "./PrivateRouter";
 import Dashboard from "../pages/Dashboard";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const AppRouter = () => {
 	return (
@@ -17,6 +17,7 @@ const AppRouter = () => {
 					<Route path="" element={<Dashboard />} />
 				</Route>
 			</Routes>
+			<Footer />
 		</Router>
 	);
 };

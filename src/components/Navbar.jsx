@@ -11,11 +11,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import logo from "../assets/museum.png";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Dashboard", "New Blog", "About"];
+const settings = ["Login"];
 
 function Navbar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -37,12 +36,9 @@ function Navbar() {
 	};
 
 	return (
-		<AppBar position="static">
+		<AppBar position="static" sx={{ backgroundColor: "#18003C" }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					{/* <AdbIcon
-						sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-					/> */}
 					<Typography
 						variant="h6"
 						noWrap

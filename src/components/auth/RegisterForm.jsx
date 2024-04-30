@@ -114,18 +114,18 @@ const SignUpForm = ({
 						helperText={touched.email && errors.email}
 						error={touched.email && Boolean(errors.email)}
 					/>
-					{/* <TextField
+					<TextField
 						label="Image"
 						name="image"
 						id="image"
-						type="image"
+						type="url"
 						variant="outlined"
 						value={values.email}
 						onChange={handleChange}
 						onBlur={handleBlur}
 						helperText={touched.email && errors.email}
 						error={touched.email && Boolean(errors.email)}
-					/> */}
+					/>
 					<TextField
 						label="Bio"
 						name="bio"
@@ -165,7 +165,7 @@ const SignUpForm = ({
 							endAdornment: (
 								<InputAdornment position="end">
 									<IconButton onClick={toggleVisibility}>
-										{isPasswordVisible ? (
+										{!isPasswordVisible ? (
 											<VisibilityOff />
 										) : (
 											<Visibility />
@@ -184,6 +184,7 @@ const SignUpForm = ({
 						type="submit"
 						variant="contained"
 						size="medium"
+						sx={{ backgroundColor: "#18003C" }}
 						disabled={isSubmitting}
 					>
 						{isSubmitting ? "Loading..." : "Sign Up"}

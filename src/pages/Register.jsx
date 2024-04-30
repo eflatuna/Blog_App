@@ -26,10 +26,10 @@ const Register = () => {
 				<Grid item xs={9}>
 					<Avatar
 						sx={{
-							backgroundColor: "secondary.light",
+							backgroundColor: "#18003C",
 							m: "auto",
-							width: 30,
-							height: 30,
+							width: 35,
+							height: 35,
 						}}
 					>
 						<LockIcon size="30" />
@@ -38,7 +38,7 @@ const Register = () => {
 						variant="h5"
 						align="center"
 						mb={2}
-						color="secondary.light"
+						color="#18003C"
 					>
 						Sign up
 					</Typography>
