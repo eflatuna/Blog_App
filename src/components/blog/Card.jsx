@@ -1,5 +1,4 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -8,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import { Button } from "@mui/material";
+import { Button, styled } from "@mui/material";
 import Comment from "@mui/icons-material/Comment";
 import Preview from "@mui/icons-material/Preview";
 
@@ -23,7 +22,7 @@ const ExpandMore = styled((props) => {
 	}),
 }));
 
-export default function RecipeReviewCard() {
+export default function BlogCard({ _id, title, content, image }) {
 	const [expanded, setExpanded] = React.useState(false);
 
 	const handleExpandClick = () => {
@@ -31,16 +30,14 @@ export default function RecipeReviewCard() {
 	};
 
 	return (
-		<Card sx={{ maxWidth: 345 }}>
-			<CardMedia component="img" height="194" image="" alt="" />
+		<Card sx={{ maxWidth: 345 }} key={_id}>
+			<CardMedia component="img" height="194" image={image} alt="" />
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="div">
-					Lizard
+					{title}
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
-					This impressive paella is a perfect party dish and a fun
-					meal to cook together with your guests. Add 1 cup of frozen
-					peas along with the mussels, if you like.
+					{content}
 				</Typography>
 			</CardContent>
 			<CardActions disableSpacing>

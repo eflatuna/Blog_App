@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getBlogData } from "../features/blogSlice";
+import { getSuccess, fetchFail, fetchStart } from "../features/blogSlice";
+import { useSelector } from "react-redux";
+import useAxios from "./useAxios";
 
 const useBlogCall = () => {
 	const dispatch = useDispatch();

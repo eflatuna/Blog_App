@@ -1,11 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Card from "../components/blog/Card";
+import BlogCard from "../components/blog/Card";
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import useBlogCall from "../hooks/useBlogCalls";
-// import useBlogCalls from "../hooks/useBlogCalls";
+import { useEffect } from "react";
 
 function Dashboard() {
 	const { getBlogData } = useBlogCall();
@@ -19,11 +19,11 @@ function Dashboard() {
 			<CssBaseline />
 			<Grid container spacing={2} mt={3}>
 				{blogs.map((blog) => (
-					<Grid item xs={12} md={6} lg={4} xl={3} key={firm._id}>
-						<Card
-							{...blogs}
-							handleOpen={handleOpen}
-							setInitialState={setInitialState}
+					<Grid item xs={12} md={6} lg={4} xl={3} key={blog._id}>
+						<BlogCard
+							{...blog}
+							// handleOpen={handleOpen}
+							// setInitialState={setInitialState}
 						/>
 					</Grid>
 				))}
