@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import logo from "../assets/museum.png";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import useAuthCall from "../hooks/useAuthCalls";
 
 const pages = ["Dashboard", "New Blog", "About"];
 const loggedInSettings = ["My Blogs", "Profile", "Logout"];
@@ -23,6 +24,7 @@ function Navbar() {
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
 	const { currentUser } = useSelector((state) => state.auth);
 	const navigate = useNavigate();
+	const { logout } = useAuthCall();
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -40,13 +42,13 @@ function Navbar() {
 	};
 	const handleMenuItemClick = (setting) => {
 		if (setting === "Login") {
-			// Logout işlemi
 		} else if (setting === "Logout") {
-			navigate("/login"); // Login sayfasına yönlendiriyoruz
+			logout();
 		}
 		handleCloseUserMenu();
 	};
 	const isUserLoggedIn = Boolean(currentUser);
+	console.log(currentUser);
 	return (
 		<AppBar position="static" sx={{ backgroundColor: "#18003C" }}>
 			<Container maxWidth="xl">

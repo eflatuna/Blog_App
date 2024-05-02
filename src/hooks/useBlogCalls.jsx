@@ -1,7 +1,29 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { getBlogData } from "../features/blogSlice";
 
-const useBlogCalls = () => {
-	return <div>useBlogCalls</div>;
+const useBlogCall = () => {
+	const dispatch = useDispatch();
+	const { token } = useSelector((state) => state.auth);
+	const axiosWithToken = useAxios();
+
+	const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+	const getBlogData = async (url) => {
+		dispatch(fetchStart());
+		try {
+			const { data } = await axiosWithToken(`${url}`);
+			console.log(data);
+
+			dispatch(getSuccess({ data: data.data, url }));
+		} catch (error) {
+			console.log(error);
+			dispatch(fetchFail());
+		}
+	};
+	return {
+		getBlogData,
+	};
 };
 
-export default useBlogCalls;
+export default useBlogCall;

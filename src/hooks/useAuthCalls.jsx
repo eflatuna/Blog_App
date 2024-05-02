@@ -24,7 +24,7 @@ const useAuthCall = () => {
 
 			console.log("register", data);
 			dispatch(registerSuccess(data));
-			navigate("/");
+			navigate("/login");
 		} catch (error) {
 			dispatch(fetchFail());
 		}
@@ -57,7 +57,7 @@ const useAuthCall = () => {
 			});
 			dispatch(logoutSuccess());
 			toastSuccessNotify("Logout performed");
-			navigate("/");
+			navigate("/login");
 		} catch (error) {
 			dispatch(fetchFail());
 			console.log(error);
