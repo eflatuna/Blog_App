@@ -9,9 +9,10 @@ import { Link } from "react-router-dom";
 import { Formik } from "formik";
 // import useAuthCall from "../hooks/useAuthCall";
 import LoginForm, { loginScheme } from "../components/auth/LoginForm";
+import useAuthCall from "../hooks/useAuthCalls";
 
 const Login = () => {
-	// const { login } = useAuthCall();
+	const { login } = useAuthCall();
 	return (
 		<Container maxWidth="sm">
 			<Grid

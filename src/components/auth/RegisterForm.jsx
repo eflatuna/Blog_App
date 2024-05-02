@@ -2,12 +2,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Form } from "formik";
-import { useState } from "react";
 import * as Yup from "yup";
-import IconButton from "@mui/material/IconButton";
-import InputAdornment from "@mui/material/InputAdornment";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export const SignupSchema = Yup.object().shape({
 	username: Yup.string().min(3).max(15).required("Required!"),
@@ -41,26 +36,9 @@ const SignUpForm = ({
 	handleBlur,
 	isSubmitting,
 }) => {
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const passwordsMatch = values.password === confirmPassword;
-
-	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-	const toggleVisibility = () => {
-		setIsPasswordVisible(!isPasswordVisible);
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (!passwordsMatch) {
-			alert("Passwords don't match");
-			return;
-		}
-		console.log("Form submitted");
-	};
-
 	return (
 		<div>
-			<Form onSubmit={handleSubmit}>
+			<Form>
 				<Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
 					<TextField
 						id="username"
@@ -115,36 +93,10 @@ const SignUpForm = ({
 						error={touched.email && Boolean(errors.email)}
 					/>
 					<TextField
-						label="Image"
-						name="image"
-						id="image"
-						type="url"
-						variant="outlined"
-						value={values.imagebio}
-						onChange={handleChange}
-						onBlur={handleBlur}
-						helperText={touched.image && errors.image}
-						error={touched.image && Boolean(errors.image)}
-					/>
-					<TextField
-						label="Bio"
-						name="bio"
-						id="bio"
-						type="bio"
-						variant="outlined"
-						value={values.bio}
-						onChange={handleChange}
-						onBlur={handleBlur}
-						helperText={touched.bio && errors.bio}
-						error={touched.bio && Boolean(errors.bio)}
-					/>
-
-					<TextField
 						label="Password"
 						name="password"
 						id="password"
-						type={isPasswordVisible ? "text" : "password"}
-						placeholder="Enter your password"
+						type="password"
 						variant="outlined"
 						value={values.password}
 						onChange={handleChange}
@@ -152,40 +104,15 @@ const SignUpForm = ({
 						helperText={touched.password && errors.password}
 						error={touched.password && Boolean(errors.password)}
 					/>
-					<TextField
-						label="Confirm Password"
-						name="confirmPassword"
-						id="confirmPassword"
-						type={isPasswordVisible ? "text" : "password"}
-						placeholder="Enter your password"
-						variant="outlined"
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						InputProps={{
-							endAdornment: (
-								<InputAdornment position="end">
-									<IconButton onClick={toggleVisibility}>
-										{!isPasswordVisible ? (
-											<VisibilityOff />
-										) : (
-											<Visibility />
-										)}
-									</IconButton>
-								</InputAdornment>
-							),
-						}}
-						onBlur={handleBlur}
-						helperText={touched.password && errors.password}
-						error={touched.password && Boolean(errors.password)}
-					/>
-					{!passwordsMatch && <p>Passwords don't match!</p>}
 
 					<Button
 						type="submit"
 						variant="contained"
-						size="medium"
-						sx={{ backgroundColor: "#18003C" }}
+						size="large"
 						disabled={isSubmitting}
+						sx={{
+							backgroundColor: "#18003C",
+						}}
 					>
 						{isSubmitting ? "Loading..." : "Sign Up"}
 					</Button>

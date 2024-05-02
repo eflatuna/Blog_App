@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
 function Footer() {
 	const classes = useStyles();
-	const currentDate = new Date().getFullYear(); // Get current date in local format
+	const currentDate = new Date().getFullYear();
 
 	return (
 		<BottomNavigation className={classes.root}>
