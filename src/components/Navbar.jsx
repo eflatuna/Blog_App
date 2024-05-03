@@ -42,6 +42,7 @@ function Navbar() {
 	};
 	const handleMenuItemClick = (setting) => {
 		if (setting === "Login") {
+			navigate("/login");
 		} else if (setting === "Logout") {
 			logout();
 		}

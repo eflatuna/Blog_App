@@ -10,24 +10,27 @@ import ShareIcon from "@mui/icons-material/Share";
 import { Button, styled } from "@mui/material";
 import Comment from "@mui/icons-material/Comment";
 import Preview from "@mui/icons-material/Preview";
+import { useNavigate } from "react-router-dom";
 
-const ExpandMore = styled((props) => {
-	const { expand, ...other } = props;
-	return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-	transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-	marginLeft: "auto",
-	transition: theme.transitions.create("transform", {
-		duration: theme.transitions.duration.shortest,
-	}),
-}));
+// const ExpandMore = styled((props) => {
+// 	const { expand, ...other } = props;
+
+// 	return <IconButton {...other} />;
+// })(({ theme, expand }) => ({
+// 	transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+// 	marginLeft: "auto",
+// 	transition: theme.transitions.create("transform", {
+// 		duration: theme.transitions.duration.shortest,
+// 	}),
+// }));
 
 export default function BlogCard({ _id, title, content, image }) {
-	const [expanded, setExpanded] = React.useState(false);
+	// const [expanded, setExpanded] = React.useState(false);
+	const navigate = useNavigate();
 
-	const handleExpandClick = () => {
-		setExpanded(!expanded);
-	};
+	// const handleExpandClick = () => {
+	// 	setExpanded(!expanded);
+	// };
 
 	return (
 		<Card sx={{ maxWidth: 345 }} key={_id}>
@@ -53,14 +56,17 @@ export default function BlogCard({ _id, title, content, image }) {
 				<IconButton aria-label="preview">
 					<Preview />
 				</IconButton>
-				<ExpandMore
+				{/* <ExpandMore
 					expand={expanded}
 					onClick={handleExpandClick}
 					aria-expanded={expanded}
 					aria-label="show more"
 				>
-					<Button size="small">Read More</Button>
-				</ExpandMore>
+					
+				</ExpandMore> */}
+				<Button size="small" onClick={() => navigate("/details")}>
+					Read More
+				</Button>
 			</CardActions>
 		</Card>
 	);
