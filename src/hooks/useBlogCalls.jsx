@@ -22,7 +22,21 @@ const useBlogCall = () => {
 			dispatch(fetchFail());
 		}
 	};
+
+	const getDetailsData = async (url) => {
+		dispatch(fetchStart());
+		try {
+			const { data } = await axiosWithToken(`${url}/{id}`);
+			console.log(data);
+
+			dispatch(getSuccess({ data: data.data, url }));
+		} catch (error) {
+			console.log(error);
+			dispatch(fetchFail());
+		}
+	};
 	return {
+		getDetailsData,
 		getBlogData,
 	};
 };

@@ -40,7 +40,9 @@ export default function BlogCard({ _id, title, content, image }) {
 					{title}
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
-					{content}
+					{content.length > 100
+						? `${content.slice(0, 100)}...`
+						: content}
 				</Typography>
 			</CardContent>
 			<CardActions disableSpacing>
@@ -64,7 +66,10 @@ export default function BlogCard({ _id, title, content, image }) {
 				>
 					
 				</ExpandMore> */}
-				<Button size="small" onClick={() => navigate("/details")}>
+				<Button
+					size="small"
+					onClick={() => navigate(`/details/${_id}`)}
+				>
 					Read More
 				</Button>
 			</CardActions>

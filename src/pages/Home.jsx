@@ -6,8 +6,9 @@ import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import useBlogCall from "../hooks/useBlogCalls";
 import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 
-function Dashboard() {
+function Home() {
 	const { getBlogData } = useBlogCall();
 	const { blogs } = useSelector((state) => state.blogs);
 	console.log("blogs:", blogs);
@@ -28,8 +29,9 @@ function Dashboard() {
 					</Grid>
 				))}
 			</Grid>
+			<Outlet />
 		</Box>
 	);
 }
 
-export default Dashboard;
+export default Home;

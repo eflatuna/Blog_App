@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useAuthCall from "../hooks/useAuthCalls";
 
-const pages = ["Dashboard", "New Blog", "About"];
+const pages = ["Home", "New Blog", "About"];
 const loggedInSettings = ["My Blogs", "Profile", "Logout"];
 const loggedOutSettings = ["Login"];
 function Navbar() {
