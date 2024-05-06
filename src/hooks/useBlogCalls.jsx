@@ -23,35 +23,8 @@ const useBlogCall = () => {
 		}
 	};
 
-	const getDetailsData = async (url) => {
-		dispatch(fetchStart());
-		try {
-			const { data } = await axiosWithToken(`${url}/{id}`);
-			console.log(data);
-
-			dispatch(getSuccess({ data: data.data, url }));
-		} catch (error) {
-			console.log(error);
-			dispatch(fetchFail());
-		}
-	};
-	const getCommentsData = async (url) => {
-		dispatch(fetchStart());
-		try {
-			const { data } = await axiosWithToken(`${url}/{userId}`);
-			console.log(data);
-
-			dispatch(getSuccess({ data: data.data, url }));
-		} catch (error) {
-			console.log(error);
-			dispatch(fetchFail());
-		}
-	};
-
 	return {
-		getDetailsData,
 		getBlogData,
-		getCommentsData,
 	};
 };
 

@@ -9,7 +9,7 @@ const useStyles = makeStyles({
 		position: "fixed",
 		bottom: 0,
 		color: "white",
-		backgroundColor: "#18003C", // Adjust color as needed
+		backgroundColor: "#18003C",
 	},
 	footerText: {
 		marginTop: 15,

@@ -1,7 +1,76 @@
+import {
+	Box,
+	Button,
+	Card,
+	CardContent,
+	Divider,
+	TextField,
+	Typography,
+} from "@mui/material";
 import React from "react";
+import { useState } from "react";
 
-const CommentForm = () => {
-	return <div>CommentForm</div>;
+const CommentForm = ({ data }) => {
+	const [comment, setComment] = useState("");
+	const [comments, setComments] = useState([]);
+	const addComment = () => {
+		if (comment.trim() !== "") {
+			setComments([...comments, comment]);
+			setComment("");
+		}
+	};
+	return (
+		<Card
+			sx={{
+				mb: 8,
+				mt: 2,
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				justifyContent: "center",
+			}}
+		>
+			<CardContent>
+				<Box sx={{ display: "flex", alignItems: "center" }}>
+					<Typography variant="h6"></Typography>
+				</Box>
+				<Box
+					sx={{
+						mb: 2,
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						justifyContent: "center",
+					}}
+				>
+					<TextField
+						id="outlined-multiline-static"
+						label="Add a comment"
+						multiline
+						rows={4}
+						value={comment}
+						onChange={(e) => setComment(e.target.value)}
+						sx={{ marginBottom: "32px", width: 500 }}
+					/>
+					<Button
+						variant="contained"
+						sx={{ backgroundColor: "#18003C", width: 500 }}
+						onClick={addComment}
+					>
+						ADD COMMENT
+					</Button>
+				</Box>
+				<Box>
+					{comments.map((yorum, index) => (
+						<Typography key={index} variant="body1">
+							{yorum}
+						</Typography>
+					))}
+					<Divider />
+				</Box>
+			</CardContent>
+		</Card>
+	);
 };
 
 export default CommentForm;
