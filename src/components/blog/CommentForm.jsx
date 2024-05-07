@@ -31,7 +31,12 @@ const CommentForm = ({ data }) => {
 			}}
 		>
 			<CardContent>
-				<Box sx={{ display: "flex", alignItems: "center" }}>
+				<Box
+					sx={{
+						display: "flex",
+						alignItems: "center",
+					}}
+				>
 					<Typography variant="h6"></Typography>
 				</Box>
 				<Box
@@ -62,11 +67,13 @@ const CommentForm = ({ data }) => {
 				</Box>
 				<Box>
 					{comments.map((yorum, index) => (
-						<Typography key={index} variant="body1">
-							{yorum}
-						</Typography>
+						<>
+							<Typography key={index} variant="body1">
+								{yorum}
+							</Typography>
+							<Divider />
+						</>
 					))}
-					<Divider />
 				</Box>
 			</CardContent>
 		</Card>
