@@ -8,6 +8,7 @@ import {
 	CardMedia,
 	Typography,
 	IconButton,
+	Stack,
 } from "@mui/material";
 
 import { useState } from "react";
@@ -18,11 +19,17 @@ import { Preview } from "@mui/icons-material";
 import Comment from "@mui/icons-material/Comment";
 import CommentForm from "../components/blog/CommentForm";
 import CommentCard from "../components/blog/CommentCard";
+import useBlogCall from "../hooks/useBlogCalls";
+import { useSelector } from "react-redux";
 
 const Detail = () => {
-	const [data, setData] = useState(null);
-	const [commentFormOpen, setCommentFormOpen] = useState(false);
 	const { id } = useParams();
+	const { comments } = useSelector((state) => state.blogs);
+	const { getBlogData } = useBlogCall();
+	const [data, setData] = useState(null);
+	const [filteredComments, setFilteredComments] = useState([]);
+	const [commentsOpen, setCommentsOpen] = useState(false);
+
 	const BASE_URL = import.meta.env.VITE_BASE_URL;
 	const axiosWithToken = useAxios();
 
@@ -34,17 +41,28 @@ const Detail = () => {
 			console.error("Error fetching blog details:", error);
 		}
 	};
+
 	useEffect(() => {
 		getDetailsData();
 	}, [id]);
+
+	useEffect(() => {
+		getBlogData("comments");
+	}, []);
+
+	useEffect(() => {
+		const blogComments = comments.filter(
+			(comment) => comment.blogId === id
+		);
+		setFilteredComments(blogComments);
+	}, [comments, id]);
 
 	if (!data) {
 		return <div>Loading...</div>;
 	}
 
-	const handleComment = () => {
-		console.log("Comment");
-		setCommentFormOpen(!commentFormOpen);
+	const toggleComments = () => {
+		setCommentsOpen((prev) => !prev);
 	};
 
 	return (
@@ -91,17 +109,39 @@ const Detail = () => {
 				<IconButton aria-label="share">
 					<ShareIcon />
 				</IconButton>
-				<IconButton aria-label="comment">
-					<Comment onClick={handleComment} />
+				<IconButton aria-label="comment" onClick={toggleComments}>
+					<Comment />
 				</IconButton>
 				<IconButton aria-label="preview">
 					<Preview />
 				</IconButton>
 			</Card>
-			{commentFormOpen && <CommentForm data={data} />}
-			<CommentCard data={data} />
+
+			<Stack spacing={2}>
+				{commentsOpen && (
+					<Box>
+						<CommentForm />
+						{filteredComments.map((comment) => (
+							<CommentCard key={comment._id} {...comment} />
+						))}
+					</Box>
+				)}
+			</Stack>
 		</Box>
 	);
 };
 
 export default Detail;
+
+// const [likes, setLikes] = useState(0);
+// const handleLikes = () => {
+// 	setLikes(likes + 1);
+// };
+// const [share, setShare] = useState(0);
+// const handleShare = () => {
+// 	setShare(share + 1);
+// };
+// const [preview, setPreview] = useState(false);
+// const handlePreview = () => {
+// 	setPreview(!preview);
+// };

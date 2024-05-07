@@ -9,16 +9,22 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-const CommentForm = ({ data }) => {
+const CommentForm = ({ onAddComment }) => {
 	const [comment, setComment] = useState("");
-	const [comments, setComments] = useState([]);
+
 	const addComment = () => {
 		if (comment.trim() !== "") {
-			setComments([...comments, comment]);
+			const newComment = {
+				text: comment,
+				date: new Date().toISOString(), // Tarih bilgisi
+			};
+			onAddComment(newComment);
 			setComment("");
 		}
 	};
+
 	return (
 		<Card
 			sx={{
@@ -66,14 +72,14 @@ const CommentForm = ({ data }) => {
 					</Button>
 				</Box>
 				<Box>
-					{comments.map((yorum, index) => (
+					{/* {comments.map((yorum, index) => (
 						<>
 							<Typography key={index} variant="body1">
 								{yorum}
 							</Typography>
 							<Divider />
 						</>
-					))}
+					))} */}
 				</Box>
 			</CardContent>
 		</Card>
