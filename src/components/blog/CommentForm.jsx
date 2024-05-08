@@ -10,21 +10,31 @@ import {
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import useBlogCall from "../../hooks/useBlogCalls";
+import { useEffect } from "react";
 
 const CommentForm = ({ onAddComment }) => {
+	const { id } = useParams();
+	const { comments } = useSelector((state) => state.blogs);
+	const { postBlogData } = useBlogCall();
 	const [comment, setComment] = useState("");
 
 	const addComment = () => {
-		if (comment.trim() !== "") {
-			const newComment = {
-				text: comment,
-				date: new Date().toISOString(), // Tarih bilgisi
-			};
-			onAddComment(newComment);
-			setComment("");
-		}
+		const newComment = {
+			text: comment,
+			date: new Date().toISOString(),
+		};
+		onAddComment(newComment);
+		setComment("");
 	};
-
+	useEffect(() => {
+		postBlogData("comments");
+	}, []);
+	const handleClick = () => {
+		console.log("comment");
+		setComment("");
+	};
 	return (
 		<Card
 			sx={{
@@ -67,6 +77,7 @@ const CommentForm = ({ onAddComment }) => {
 						variant="contained"
 						sx={{ backgroundColor: "#18003C", width: 500 }}
 						onClick={addComment}
+						disabled={!comment.trim()}
 					>
 						ADD COMMENT
 					</Button>

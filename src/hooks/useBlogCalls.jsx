@@ -22,9 +22,24 @@ const useBlogCall = () => {
 			dispatch(fetchFail());
 		}
 	};
+	const postBlogData = async (url, info) => {
+		dispatch(fetchStart());
+		try {
+			await axiosWithToken.post(`${url}`, info);
+			console.log(data);
+
+			dispatch(postSuccess({ data: data.data, url }));
+		} catch (error) {
+			console.error("Error posting data:", error);
+			dispatch(fetchFail());
+		} finally {
+			getBlogData(url);
+		}
+	};
 
 	return {
 		getBlogData,
+		postBlogData,
 	};
 };
 

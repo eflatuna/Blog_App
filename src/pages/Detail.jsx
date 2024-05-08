@@ -22,7 +22,7 @@ import CommentCard from "../components/blog/CommentCard";
 import useBlogCall from "../hooks/useBlogCalls";
 import { useSelector } from "react-redux";
 
-const Detail = () => {
+const Detail = ({ onAddComment }) => {
 	const { id } = useParams();
 	const { comments } = useSelector((state) => state.blogs);
 	const { getBlogData } = useBlogCall();
@@ -64,7 +64,15 @@ const Detail = () => {
 	const toggleComments = () => {
 		setCommentsOpen((prev) => !prev);
 	};
+	const handleAddComment = (newComment) => {
+		const newCommentWithBlogId = { ...newComment, blogId: id };
 
+		// Yorumları güncelle
+		setFilteredComments([...filteredComments, newCommentWithBlogId]);
+
+		// Sunucuya yeni yorumu eklemek için istekte bulun
+		axiosWithToken.post(`${BASE_URL}comments/${id}`, newCommentWithBlogId);
+	};
 	return (
 		<Box sx={{ px: 20, mb: 20 }}>
 			<Card>
@@ -120,7 +128,7 @@ const Detail = () => {
 			<Stack spacing={2}>
 				{commentsOpen && (
 					<Box>
-						<CommentForm />
+						<CommentForm onAddComment={handleAddComment} />
 						{filteredComments.map((comment) => (
 							<CommentCard key={comment._id} {...comment} />
 						))}
