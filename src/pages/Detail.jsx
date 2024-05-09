@@ -19,15 +19,10 @@ import { Preview } from "@mui/icons-material";
 import Comment from "@mui/icons-material/Comment";
 import CommentForm from "../components/blog/CommentForm";
 import CommentCard from "../components/blog/CommentCard";
-import useBlogCall from "../hooks/useBlogCalls";
-import { useSelector } from "react-redux";
 
-const Detail = ({ onAddComment }) => {
+const Detail = () => {
 	const { id } = useParams();
-	const { comments } = useSelector((state) => state.blogs);
-	const { getBlogData } = useBlogCall();
 	const [data, setData] = useState(null);
-	const [filteredComments, setFilteredComments] = useState([]);
 	const [commentsOpen, setCommentsOpen] = useState(false);
 
 	const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -46,17 +41,6 @@ const Detail = ({ onAddComment }) => {
 		getDetailsData();
 	}, [id]);
 
-	useEffect(() => {
-		getBlogData("comments");
-	}, []);
-
-	useEffect(() => {
-		const blogComments = comments.filter(
-			(comment) => comment.blogId === id
-		);
-		setFilteredComments(blogComments);
-	}, [comments, id]);
-
 	if (!data) {
 		return <div>Loading...</div>;
 	}
@@ -64,15 +48,14 @@ const Detail = ({ onAddComment }) => {
 	const toggleComments = () => {
 		setCommentsOpen((prev) => !prev);
 	};
-	const handleAddComment = (newComment) => {
+
+	const handleAddComment = async (newComment) => {
 		const newCommentWithBlogId = { ...newComment, blogId: id };
 
-		// Yorumları güncelle
-		setFilteredComments([...filteredComments, newCommentWithBlogId]);
-
-		// Sunucuya yeni yorumu eklemek için istekte bulun
-		axiosWithToken.post(`${BASE_URL}comments/${id}`, newCommentWithBlogId);
+		await axiosWithToken.post(`${BASE_URL}comments`, newCommentWithBlogId);
+		getDetailsData();
 	};
+
 	return (
 		<Box sx={{ px: 20, mb: 20 }}>
 			<Card>
@@ -129,7 +112,7 @@ const Detail = ({ onAddComment }) => {
 				{commentsOpen && (
 					<Box>
 						<CommentForm onAddComment={handleAddComment} />
-						{filteredComments.map((comment) => (
+						{data.comments.map((comment) => (
 							<CommentCard key={comment._id} {...comment} />
 						))}
 					</Box>

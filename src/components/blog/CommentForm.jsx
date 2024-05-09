@@ -3,38 +3,23 @@ import {
 	Button,
 	Card,
 	CardContent,
-	Divider,
 	TextField,
 	Typography,
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import useBlogCall from "../../hooks/useBlogCalls";
-import { useEffect } from "react";
 
 const CommentForm = ({ onAddComment }) => {
-	const { id } = useParams();
-	const { comments } = useSelector((state) => state.blogs);
-	const { postBlogData } = useBlogCall();
 	const [comment, setComment] = useState("");
 
 	const addComment = () => {
 		const newComment = {
-			text: comment,
-			date: new Date().toISOString(),
+			comment: comment,
 		};
 		onAddComment(newComment);
 		setComment("");
 	};
-	useEffect(() => {
-		postBlogData("comments");
-	}, []);
-	const handleClick = () => {
-		console.log("comment");
-		setComment("");
-	};
+
 	return (
 		<Card
 			sx={{
@@ -81,16 +66,6 @@ const CommentForm = ({ onAddComment }) => {
 					>
 						ADD COMMENT
 					</Button>
-				</Box>
-				<Box>
-					{/* {comments.map((yorum, index) => (
-						<>
-							<Typography key={index} variant="body1">
-								{yorum}
-							</Typography>
-							<Divider />
-						</>
-					))} */}
 				</Box>
 			</CardContent>
 		</Card>
